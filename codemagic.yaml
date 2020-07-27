@@ -15,11 +15,12 @@ workflows:
             node: latest
         scripts:
             - npm install
+            - npm test
             - echo "sdk.dir=$HOME/programs/android-sdk-macosx" > "$FCI_BUILD_DIR/android/local.properties"
             - |
+                # build Android
                 chmod -R 777 $FCI_BUILD_DIR
                 echo $CM_KEYSTORE | base64 --decode > $FCI_BUILD_DIR/keystore.jks
-                # build Android
                 cd android
                 ./gradlew assembleRelease
             - |
